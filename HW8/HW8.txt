@@ -1,0 +1,61 @@
+Задание:
+Написать скрипт очистки директорий. На вход принимает путь к директории.
+
+
+
+Если директория существует, то удаляет в ней все файлы с расширениями .bak, .tmp, .backup.
+Если директории нет, то выводит ошибку.
+
+#!/bin/bash
+
+directory=$1
+if [ -n $directory ] 
+	then
+		cd $directory
+		echo 'begin'
+		rm -R *.bak | rm -R *.tmp | rm -R *.backup
+	else
+		echo 'directory not found'
+fi
+
+ 
+* Создать скрипт ownersort.sh, который в заданной папке копирует файлы в директории, названные по имени владельца каждого файла. Учтите, что файл должен принадлежать соответствующему владельцу.
+
+
+#!/bin/bash
+
+directory-$1
+
+if [ -z $directory ]
+then
+	echo "Specify a directory" 
+	exit 1
+
+fi
+
+if [ ! -d $directory ]
+
+then
+	echo "Not a directory!" 
+	exit 1
+
+fi
+
+filelist=$(ls $directory)
+
+for file in $filelist
+
+do
+	owner=$(ls -l $directory/$file | awk '{print $3}')
+	if [ ! -d $owner ]
+	then
+		mkdir $owner
+		chown -R $owner:$owner $owner
+	fi
+	cp -p $directory/$file $owner
+
+done
+
+
+Результат:
+Код скриптов в текстовом виде (каждый скрипт в отдельном файле). Кодировка файлов UTF-8.
